@@ -2,6 +2,7 @@
 import { useQuery } from '@tanstack/react-query'
 import getProductList from '../api/product-list'
 import { Product } from '../types/products'
+import { indexBy } from 'ramda'
 
 export const useProductList = () => {
   const { data: productList, ...helpers } = useQuery<Product[]>({
@@ -10,5 +11,9 @@ export const useProductList = () => {
     staleTime: 1000 * 60 * 5,
   })
 
-  return { productList, ...helpers }
+  return {
+    productList,
+    productsById: indexBy((p) => p.id, productList ?? []),
+    ...helpers,
+  }
 }

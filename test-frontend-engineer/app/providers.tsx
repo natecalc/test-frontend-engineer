@@ -8,7 +8,7 @@ import {
 
 let browserQueryClient: QueryClient | undefined = undefined
 
-function getQueryClient() {
+export function getQueryClient() {
   if (isServer) {
     return new QueryClient({
     defaultOptions: {
