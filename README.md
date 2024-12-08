@@ -52,6 +52,4 @@ Given more time, I would add:
 
 ## 👤 Created By
 
-Your Name
-
 - GitHub: [@natecalc](https://github.com/natecalc)
