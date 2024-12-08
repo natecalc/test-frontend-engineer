@@ -4,6 +4,7 @@ import './globals.css'
 import { Button } from './components/button'
 import { ShoppingBasketIcon } from 'lucide-react'
 import Link from 'next/link'
+import Providers from './providers'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -56,7 +57,7 @@ export default function RootLayout({
             </Button>
           </div>
         </header>
-        {children}
+        <Providers>{children}</Providers>
         <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
           <div className="container mx-auto px-4 py-6">
             <p className="text-center text-sm text-muted-foreground">
