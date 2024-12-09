@@ -4,6 +4,10 @@ A modern e-commerce frontend built with Next.js 14, TypeScript, and Tailwind
 CSS. This project was created as part of a technical assessment demonstrating
 frontend development capabilities.
 
+## Live App
+
+- **Vercel:** https://test-frontend-engineer-2xfo5up2b-natecalcs-projects.vercel.app/
+
 ## Tech Stack
 
 - **Framework:** Next.js 14
