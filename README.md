@@ -4,7 +4,7 @@ A modern e-commerce frontend built with Next.js 14, TypeScript, and Tailwind
 CSS. This project was created as part of a technical assessment demonstrating
 frontend development capabilities.
 
-## ⚡ Tech Stack
+## Tech Stack
 
 - **Framework:** Next.js 14
 - **Language:** TypeScript
@@ -13,8 +13,9 @@ frontend development capabilities.
 - **State Management:** Zustand
 - **API Integration:** Axios with TypeScript types
 - **Deployment:** Vercel
+- **Functional Library:** Ramda
 
-## 🛠️ Installation
+## Installation
 
 1. Clone the repository:
 
@@ -40,7 +41,7 @@ NEXT_PUBLIC_API_URL=https://api.example.com
 bun dev
 ```
 
-## 💭 Future Improvements
+## Future Improvements
 
 Given more time, I would add:
 
@@ -48,8 +49,8 @@ Given more time, I would add:
 - Wishlist functionality
 - Product reviews
 - Advanced filtering options
-- Performance monitoring
+- Checkout and pay via Stripe
 
-## 👤 Created By
+## Created By
 
 - GitHub: [@natecalc](https://github.com/natecalc)
