@@ -8,6 +8,7 @@ import { ascend, descend, filter, map, prop, sort, uniq } from "ramda";
 import { ProductFilters } from "./components/product-filters";
 import { Product } from "../lib/types/products";
 import { ITEMS_PER_PAGE } from "@/lib/constants";
+import { HeartCrack } from "lucide-react";
 
 export default function Home() {
   const { productList, isLoading, isFetching } = useProductList();
@@ -17,25 +18,21 @@ export default function Home() {
   const currentSort = searchParams.get("sort") || "price-asc";
   const router = useRouter();
 
-  // TODO finish loading state
   if (isLoading || isFetching) {
     return (
-      <div className="grid min-h-screen grid-cols-1 place-items-center gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-self-center items-center py-24 justify-items-center min-h-screen">
         {Array.from({ length: 8 }).map((_, index) => (
-          <div className="group h-80 w-72 rounded-none border-none" key={index}>
+          <div className="group h-60 w-48 rounded-none border-none" key={index}>
             <div className="h-2/3 items-center p-0">
               <Skeleton className="h-full w-full" />
             </div>
-            <div className="h-1/3 p-4">
+            <div className="h-1/3 p-2">
               <div className="flex w-full justify-between">
-                <Skeleton className="mb-2 h-4 w-1/3" />
-                <Skeleton className="mb-2 h-4 w-1/3" />
+                <Skeleton className="mb-1 h-3 w-1/3" />
+                <Skeleton className="mb-1 h-3 w-1/3" />
               </div>
-              <Skeleton className="mb-2 h-4 w-2/3" />
-              <Skeleton className="h-6 w-1/2" />
-            </div>
-            <div className="p-4 pt-0">
-              <Skeleton className="h-10 w-full" />
+              <Skeleton className="mb-1 h-3 w-2/3" />
+              <Skeleton className="h-4 w-1/2" />
             </div>
           </div>
         ))}
@@ -43,11 +40,13 @@ export default function Home() {
     );
   }
 
-  // TODO finish error state
   if (!productList) {
     return (
       <div className="grid min-h-screen items-center justify-items-center gap-16">
-        <p>No products found</p>
+        <div className="flex flex-col items-center gap-4 text-destructive">
+          <HeartCrack />
+          <p>No products found. Please try refreshing the page.</p>
+        </div>
       </div>
     );
   }

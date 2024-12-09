@@ -1,13 +1,11 @@
-// page.tsx
-
-import ProductDetailsClient from "@/app/components/product-details-client"
+import ProductDetailsClient from "@/app/components/product-details-client";
 
 export default async function ProductDetails({
   params,
 }: {
-  params: Promise<{ id: number }>
+  params: Promise<{ id: number }>;
 }) {
-  const selectedProductId = (await params).id
+  const selectedProductId = (await params).id;
 
   return (
     <div className="grid min-h-screen items-center justify-items-center gap-16 pb-20">
@@ -15,5 +13,5 @@ export default async function ProductDetails({
         <ProductDetailsClient selectedProductId={selectedProductId} />
       </main>
     </div>
-  )
+  );
 }

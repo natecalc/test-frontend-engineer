@@ -7,6 +7,7 @@ import { Button } from "./button";
 import { Product } from "../../lib/types/products";
 import { useRouter } from "next/navigation";
 import { formatUSD } from "@/lib/utils";
+import { useCart } from "../hooks/useCart";
 
 export default function ProductDetailsClient({
   selectedProductId,
@@ -15,6 +16,7 @@ export default function ProductDetailsClient({
 }) {
   const { productsById, productList, isLoading, isFetching } = useProductList();
   const router = useRouter();
+  const { addItem } = useCart();
 
   const selectedProduct = productsById?.[selectedProductId];
 
@@ -107,7 +109,11 @@ export default function ProductDetailsClient({
             {selectedProduct.description}
           </p>
           <div className="pt-4">
-            <Button size="lg" className="w-full">
+            <Button
+              size="lg"
+              className="w-full"
+              onClick={() => addItem(selectedProduct)}
+            >
               Add to Cart
             </Button>
           </div>
