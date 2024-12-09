@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./card";
-import { Product } from "../types/products";
+import { Product } from "../../lib/types/products";
 import { truncateText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Badge } from "./badge";
