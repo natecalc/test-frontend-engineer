@@ -21,3 +21,8 @@ export type ProductFiltersProps = {
   onCategoryChange: (category: string) => void;
   onSortChange: (order: string) => void;
 };
+
+export type PaginationControlsProps = {
+  currentPage: number;
+  totalPages: number;
+};

@@ -10,14 +10,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./sheet";
-import { useCart } from "../hooks/useCart";
+import { useCartStore } from "../hooks/useCartStore";
 import { Button } from "./button";
 import { ShoppingBasketIcon, Trash } from "lucide-react";
 import { reduce } from "ramda";
 import { formatUSD, truncateText } from "@/lib/utils";
+import Image from "next/image";
 
 export const Header = () => {
-  const { items, addQuantity, removeQuantity, removeItem } = useCart();
+  const { items, addQuantity, removeQuantity, removeItem } = useCartStore();
   const totalQuantity = reduce(
     (acc, item) => (item.quantity ? acc + item.quantity : acc),
     0,
@@ -28,11 +29,17 @@ export const Header = () => {
       <div className="mx-8 flex w-full items-center justify-between">
         <Link href="/">
           <div className="flex space-x-4">
-            <img src="/stride-logo.svg" alt="Stride" className="h-8" />
+            <Image
+              src="/stride-logo.svg"
+              alt="Stride"
+              className="h-8"
+              quality={100}
+              width={32}
+              height={32}
+            />
             <h1 className="text-2xl font-bold">Stride</h1>
           </div>
         </Link>
-
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" className="relative">
@@ -51,7 +58,6 @@ export const Header = () => {
                 One step closer to your new essentials.
               </SheetDescription>
             </SheetHeader>
-
             <div className="flex flex-col gap-4 py-4">
               {items.length === 0 ? (
                 <p>No items in your basket 😞</p>
@@ -62,10 +68,11 @@ export const Header = () => {
                     className=" w-full flex space-x-2 items-center justify-between"
                   >
                     <div className="flex items-center gap-4">
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.title}
                         className="h-16 w-16 object-cover rounded-md"
+                        quality={100}
                       />
                       <div>
                         <p className="text-xs">
@@ -81,7 +88,6 @@ export const Header = () => {
                           >
                             +
                           </Button>
-
                           <p>Qty: {item.quantity}</p>
                           <Button
                             size="sm"
@@ -94,7 +100,6 @@ export const Header = () => {
                         </div>
                       </div>
                     </div>
-
                     <Button
                       variant="destructive"
                       className="text-xs justify-self-end"
@@ -106,7 +111,6 @@ export const Header = () => {
                 ))
               )}
             </div>
-
             <h2 className="font-bold text-lg py-4">
               Total:
               {formatUSD(
@@ -117,7 +121,6 @@ export const Header = () => {
                 )
               )}
             </h2>
-
             <SheetFooter className="">
               <SheetClose asChild>
                 <Button

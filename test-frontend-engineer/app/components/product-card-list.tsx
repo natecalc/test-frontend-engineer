@@ -4,6 +4,7 @@ import { Product } from "../../lib/types/products";
 import { truncateText } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { Badge } from "./badge";
+import Image from "next/image";
 
 export const ProductCardList = ({
   productList,
@@ -15,17 +16,20 @@ export const ProductCardList = ({
   return (
     <div className="grid grid-cols-1 gap-8 p-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {productList.map(
-        ({ id, title, price, image, rating, category }: Product) => (
+        ({ id, title, price, image, rating, category }: Product, index) => (
           <div onClick={() => router.push(`/product/${id}`)} key={id}>
             <Card className="group flex max-w-72 min-h-[478px] flex-col justify-between cursor-pointer">
               <CardHeader className="items-center p-4 ">
                 <div className="h-64 w-full items-center">
-                  <img
+                  <Image
+                    quality={100}
                     src={image}
                     alt={title}
                     className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    width={24}
-                    height={24}
+                    width={125}
+                    height={125}
+                    priority={index < 8}
+                    loading={index < 8 ? "eager" : "lazy"}
                   />
                 </div>
               </CardHeader>
@@ -42,7 +46,6 @@ export const ProductCardList = ({
                 </div>
                 <p className="text-xl font-bold">${price.toFixed(2)}</p>
               </CardContent>
-
               <CardFooter className="px-4">
                 <div className="flex flex-row space-x-2 w-full justify-between justify-self-end">
                   <Badge className="capitalize" variant="outline">

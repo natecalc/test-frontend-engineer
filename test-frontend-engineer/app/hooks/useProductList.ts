@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import getProductList from "../api/product-list";
+import getProductList from "../api/getProductList";
 import { Product } from "../../lib/types/products";
 import { indexBy } from "ramda";
 

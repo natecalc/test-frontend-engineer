@@ -7,8 +7,9 @@ import { Button } from "./button";
 import { Product } from "../../lib/types/products";
 import { useRouter } from "next/navigation";
 import { formatUSD } from "@/lib/utils";
-import { useCart } from "../hooks/useCart";
-import { useToast } from "@/hooks/use-toast";
+import { useCartStore } from "../hooks/useCartStore";
+import { useToast } from "@/app/hooks/use-toast";
+import Image from "next/image";
 
 export default function ProductDetailsClient({
   selectedProductId,
@@ -17,7 +18,7 @@ export default function ProductDetailsClient({
 }) {
   const { productsById, productList, isLoading, isFetching } = useProductList();
   const router = useRouter();
-  const { addItem } = useCart();
+  const { addItem } = useCartStore();
   const { toast } = useToast();
 
   const selectedProduct = productsById?.[selectedProductId];
@@ -59,10 +60,13 @@ export default function ProductDetailsClient({
           <Card className=" border-0">
             <CardContent className="p-0">
               <div className="aspect-square relative">
-                <img
+                <Image
+                  quality={100}
                   src={selectedProduct.image}
                   alt={selectedProduct.title}
                   className="h-full w-full object-contain p-8"
+                  width={240}
+                  height={240}
                 />
               </div>
             </CardContent>
@@ -109,6 +113,7 @@ export default function ProductDetailsClient({
               className="w-full"
               onClick={() => {
                 addItem(selectedProduct);
+                window.scrollTo({ top: 0, behavior: "smooth" });
                 toast({
                   title: "Added to cart!",
                   description: `${selectedProduct.title} has been added to your cart.`,
@@ -166,12 +171,13 @@ export default function ProductDetailsClient({
                   >
                     <Card className="group flex w-24 h-24 flex-col justify-between ">
                       <div className="h-full w-full items-center p-4">
-                        <img
+                        <Image
+                          quality={100}
                           src={image}
                           alt={title}
                           className="h-full w-full object-contain "
-                          width={24}
-                          height={24}
+                          width={240}
+                          height={240}
                         />
                       </div>
                     </Card>
