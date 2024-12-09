@@ -5,9 +5,8 @@ import { Card, CardContent } from "./card";
 import { ChevronsLeft, RefreshCw, Shield, Star, Truck } from "lucide-react";
 import { Button } from "./button";
 import { Product } from "../types/products";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./carousel";
+import { formatUSD } from "@/lib/utils";
 
 export default function ProductDetailsClient({ selectedProductId }: { selectedProductId: number }) {
   const { productsById, productList, isLoading, isFetching } = useProductList()
@@ -45,13 +44,13 @@ export default function ProductDetailsClient({ selectedProductId }: { selectedPr
   }
 
   return (
-    <div className="container mx-auto px-4 py-2 sm:py-8">
+    <div className="container mx-auto sm:px-0 px-4 py-2 sm:py-8">
       <Button size="lg" className="mb-8" variant='outline' onClick={() => window.history.back()}>
       <ChevronsLeft />
       </Button>
     <div className="grid gap-8 lg:grid-cols-2">
       <div>
-        <Card className="overflow-hidden border-0">
+        <Card className=" border-0">
           <CardContent className="p-0">
             <div className="aspect-square relative">
               <img
@@ -91,7 +90,7 @@ export default function ProductDetailsClient({ selectedProductId }: { selectedPr
         </div>
         <div>
           <p className="text-3xl font-bold">
-            ${selectedProduct.price.toFixed(2)}
+            {formatUSD(selectedProduct.price)}
           </p>
         </div>
         <p className="text-base text-muted-foreground leading-relaxed">
@@ -132,34 +131,30 @@ export default function ProductDetailsClient({ selectedProductId }: { selectedPr
           </Card>
           </div>
           <p className="text-sm font-medium text-muted-foreground uppercase">RELATED PRODUCTS</p>
-          <Carousel className="w-1/2 ml-12">
-            <CarouselContent className="-ml-1">
-              {productList && productList.filter(product => product.category === selectedProduct.category && product.id !== selectedProduct.id).map(({ id, title, price, image, rating }: Product) =>
+          <div className="flex flex-row flex-wrap gap-4">
+          {productList && productList.filter(product => product.category === selectedProduct.category && product.id !== selectedProduct.id).map(({ id, title, price, image }: Product) =>
               (
-                <CarouselItem key={id} className=" basis-1/2 transition-transform duration-300 group-hover:scale-105"
-                  onClick={() => router.push(`/product/${id}`)}>
-                  <div className="p-1">
+            <div className="p-1 text-center"
+              key={id}
+            onClick={() => router.push(`/product/${id}`)}>
                     <Card
                       className="group flex w-24 h-24 flex-col justify-between "
                     >
-                          <div className="h-full w-full items-center">
-                            <Image
+                          <div className="h-full w-full items-center p-4">
+                            <img
                               src={image}
                               alt={title}
                               className="h-full w-full object-contain "
                               width={24}
                               height={24}
                             />
-                          </div>
-                    </Card>
                   </div>
-                </CarouselItem>
+                    </Card>
+                  <p className="text-xs">{formatUSD(price)}</p>
+                  </div>
               )
-              )}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+            )}
+          </div>
       </div>
     </div>
   </div>
