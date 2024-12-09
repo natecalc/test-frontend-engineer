@@ -6,7 +6,7 @@ frontend development capabilities.
 
 ## Live App
 
-- **Vercel:** https://test-frontend-engineer-2xfo5up2b-natecalcs-projects.vercel.app/
+- **Vercel:** https://test-frontend-engineer-psi.vercel.app/
 
 ## Tech Stack
 
