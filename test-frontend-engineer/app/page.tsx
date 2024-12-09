@@ -1,15 +1,23 @@
-'use client'
-import { ProductCardList } from './components/product-card-list'
-import { Skeleton } from './components/skeleton'
-import { useProductList } from './hooks/useProductList'
+"use client";
+import { useSearchParams } from "next/navigation";
+import { PaginationControls } from "./components/pagination-controls";
+import { ProductCardList } from "./components/product-card-list";
+import { Skeleton } from "./components/skeleton";
+import { useProductList } from "./hooks/useProductList";
 
 // TODO: Add pagination
 // TODO: Add filters/sorts/tags
 // TODO: Add error state component
 // TODO: Add loading state component
 
+const ITEMS_PER_PAGE = 8;
+
 export default function Home() {
-  const { productList, isLoading, isFetching } = useProductList()
+  const { productList, isLoading, isFetching } = useProductList();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
+
+  const start = (currentPage - 1) * ITEMS_PER_PAGE;
 
   if (isLoading || isFetching) {
     return (
@@ -33,18 +41,35 @@ export default function Home() {
           </div>
         ))}
       </div>
-    )
+    );
   }
+
+  if (!productList) {
+    return (
+      <div className="grid min-h-screen items-center justify-items-center gap-16">
+        <p>No products found</p>
+      </div>
+    );
+  }
+
+  const paginatedProducts = productList.slice(start, start + ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(productList.length / ITEMS_PER_PAGE);
 
   return (
     <div className="grid min-h-screen items-center justify-items-center gap-16 pb-20">
       <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
         {productList ? (
-          <ProductCardList productList={productList} />
+          <>
+            <ProductCardList productList={paginatedProducts} />
+            <PaginationControls
+              totalPages={totalPages}
+              currentPage={currentPage}
+            />
+          </>
         ) : (
           <p>No products found</p>
         )}
       </main>
     </div>
-  )
+  );
 }

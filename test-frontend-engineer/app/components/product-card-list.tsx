@@ -48,7 +48,7 @@ export const ProductCardList = ({
                   <Badge className="capitalize" variant="outline">
                     {category}
                   </Badge>
-                  <Badge className="bg-green-100 text-green-800">
+                  <Badge className="bg-green-100 text-green-800  hover:bg-green-100">
                     In Stock
                   </Badge>
                 </div>
