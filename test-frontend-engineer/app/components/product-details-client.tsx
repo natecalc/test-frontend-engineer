@@ -8,6 +8,7 @@ import { Product } from "../../lib/types/products";
 import { useRouter } from "next/navigation";
 import { formatUSD } from "@/lib/utils";
 import { useCart } from "../hooks/useCart";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ProductDetailsClient({
   selectedProductId,
@@ -17,30 +18,24 @@ export default function ProductDetailsClient({
   const { productsById, productList, isLoading, isFetching } = useProductList();
   const router = useRouter();
   const { addItem } = useCart();
+  const { toast } = useToast();
 
   const selectedProduct = productsById?.[selectedProductId];
 
   if (isLoading || isFetching) {
     return (
-      <div className="grid min-h-screen grid-cols-1 place-items-center gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div className="group h-80 w-72 rounded-none border-none" key={index}>
-            <div className="h-2/3 items-center p-0">
-              <Skeleton className="h-full w-full" />
+      <div className="container mx-auto sm:px-2 px-4 py-2 sm:py-8 min-h-screen w-screen">
+        <div className="flex flex-col md:flex-row w-full gap-12 pt-12 justify-center items-center md:items-start">
+          <Skeleton className=" h-80 w-full sm:h-96 sm:w-96 rounded-none border-none" />
+          <div className="flex flex-col gap-4 justify-between w-full sm:w-auto">
+            <div className="flex flex-col gap-4">
+              <Skeleton className="h-10 w-3/4  sm:w-96 rounded-2 border-none " />
+              <Skeleton className="h-8  w-1/2 sm:w-64 rounded-2 border-none " />
+              <Skeleton className="h-8  w-4/5 sm:w-64 rounded-2 border-none justify-end" />
             </div>
-            <div className="h-1/3 p-4">
-              <div className="flex w-full justify-between">
-                <Skeleton className="mb-2 h-4 w-1/3" />
-                <Skeleton className="mb-2 h-4 w-1/3" />
-              </div>
-              <Skeleton className="mb-2 h-4 w-2/3" />
-              <Skeleton className="h-6 w-1/2" />
-            </div>
-            <div className="p-4 pt-0">
-              <Skeleton className="h-10 w-full" />
-            </div>
+            <Skeleton className="h-10 w-f sm:w-96 rounded-2 border-none " />
           </div>
-        ))}
+        </div>
       </div>
     );
   }
@@ -50,7 +45,7 @@ export default function ProductDetailsClient({
   }
 
   return (
-    <div className="container mx-auto sm:px-0 px-4 py-2 sm:py-8">
+    <div className="container mx-auto sm:px-8 px-4 py-2 sm:py-8">
       <Button
         size="lg"
         className="mb-8"
@@ -112,7 +107,13 @@ export default function ProductDetailsClient({
             <Button
               size="lg"
               className="w-full"
-              onClick={() => addItem(selectedProduct)}
+              onClick={() => {
+                addItem(selectedProduct);
+                toast({
+                  title: "Added to cart!",
+                  description: `${selectedProduct.title} has been added to your cart.`,
+                });
+              }}
             >
               Add to Cart
             </Button>

@@ -16,7 +16,7 @@ export function ProductFilters({
   onSortChange,
 }: ProductFiltersProps) {
   return (
-    <div className="flex flex-col gap-4 sm:px-0 p-4 mb-8 sm:flex-row sm:items-center w-full sm:justify-between md:justify-start">
+    <div className="flex flex-col gap-4 sm:px-0 py-4 mb-8 sm:flex-row sm:items-center w-full md:justify-start">
       <Select value={selectedCategory} onValueChange={onCategoryChange}>
         <SelectTrigger className="sm:w-[180px] w-full">
           <SelectValue placeholder="Category capitalize">
@@ -32,7 +32,6 @@ export function ProductFilters({
           ))}
         </SelectContent>
       </Select>
-
       <Select value={sortOrder} onValueChange={onSortChange}>
         <SelectTrigger className="sm:w-[180px] w-full">
           <SelectValue placeholder="Sort by" />

@@ -18,7 +18,7 @@ export function PaginationControls({
   totalPages,
 }: PaginationControlsProps) {
   return (
-    <Pagination className="mt-8">
+    <Pagination className="mt-8 ">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
@@ -29,7 +29,7 @@ export function PaginationControls({
         </PaginationItem>
 
         {[...Array(totalPages)].map((_, i) => (
-          <PaginationItem key={i + 1}>
+          <PaginationItem key={i + 1} className="hidden md:flex">
             <PaginationLink
               href={`/?page=${i + 1}`}
               isActive={currentPage === i + 1}
