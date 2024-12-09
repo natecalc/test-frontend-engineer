@@ -18,6 +18,7 @@ frontend development capabilities.
 - **API Integration:** Axios with TypeScript types
 - **Deployment:** Vercel
 - **Functional Library:** Ramda
+- **Data Fetching Library:** Tanstack Query
 
 ## Installation
 
